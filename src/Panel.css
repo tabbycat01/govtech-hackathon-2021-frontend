@@ -1,0 +1,29 @@
+.panel {
+    border: 2px solid black;
+    padding: 20px;
+}
+
+.uploadButton, .dullButton {
+    border: 2px solid black;
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 15pt;
+}
+
+.uploadButton:hover{
+    background: rgb(138, 179, 147);
+    color: black;
+    border: 2px solid lightgreen;
+    cursor: pointer;
+}
+
+.dullButton:hover {
+    background: rgb(118, 128, 120);
+    color: black;
+    border: 2px solid lightgreen;
+    cursor: pointer;
+}

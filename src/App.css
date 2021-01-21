@@ -1,0 +1,69 @@
+.App {
+  text-align: center;
+}
+
+.topPanel{
+  position: absolute;
+  left: 50%;
+}
+
+.notif{
+  position: relative;
+  left: -50%;
+  padding: 10px;
+}
+
+.success {
+  background: rgba(141, 247, 141, 0.5);
+  border: 2px solid lightgreen;
+}
+
+.error {
+  background: rgba(230, 61, 61, 0.5);
+  border: 2px solid red;
+}
+
+/* Control the left side */
+.leftPanel {
+  left: 0;
+}
+
+/* Control the right side */
+.rightPanel {
+  right: 0;
+}
+
+.middleArrow {
+  top: 50%;
+  position: fixed;
+  left: 50%;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+  height: min(40vh, 600px);
+  /* border-radius: 50%; */
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+p {
+  font-size: 15pt;
+}
