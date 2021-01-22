@@ -5,6 +5,7 @@ import RightPanel from "./components/RightPanel"
 import LoadingComponent from "./components/Loading"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
+import { BrowserRouter } from "react-router-dom"
 
 function App() {
 
@@ -14,59 +15,61 @@ function App() {
   const [loading, setLoading] = useState(false)
 
   return (
-    <div className="App">
-      <h1>Passport cropping tool</h1>
-      {
-        notif !== null 
-        ?
-        <div className="topPanel">
-          <div className={notif.error ? "notif error": "notif success"}>
-              <p>
-                {notif.message}
-              </p>
-          </div>
-        </div>
-        :
-        null
-      }
-      
-
-      <div className="split leftPanel"> 
-        <div className="centered">
-          <LeftPanel setLoading={setLoading} file={file} setFile={setFile} setProcessedImage={setProcessedImage} setNotif={setNotif} />
-        </div>
-      </div>
-      {
-        processed_image ? 
-        <div>
-          <div className="middleArrow">
-            <FontAwesomeIcon icon={faArrowCircleRight} style={{color: "green", fontSize: "45pt"}}/>
-          </div>
-
-          <div className="split rightPanel">
-            <div className="centered">
-              <RightPanel processed_image={processed_image} />
+    <BrowserRouter>
+      <div className="App">
+        <h1>Passport cropping tool</h1>
+        {
+          notif !== null 
+          ?
+          <div className="topPanel">
+            <div className={notif.error ? "notif error": "notif success"}>
+                <p>
+                  {notif.message}
+                </p>
             </div>
           </div>
-        </div>
-        :
-        <div className="split rightPanel">
+          :
+          null
+        }
+        
+
+        <div className="split leftPanel"> 
           <div className="centered">
-            {
-              file === "" ? 
-              <p>Upload an image to be processed</p>
-              :
-              loading ?
-              <LoadingComponent />
-              :
-              <p>Click on process to view results or replace the current selection</p>
-            }
-            
+            <LeftPanel setLoading={setLoading} file={file} setFile={setFile} setProcessedImage={setProcessedImage} setNotif={setNotif} />
           </div>
         </div>
-      }
-      
-    </div>
+        {
+          processed_image ? 
+          <div>
+            <div className="middleArrow">
+              <FontAwesomeIcon icon={faArrowCircleRight} style={{color: "green", fontSize: "45pt"}}/>
+            </div>
+
+            <div className="split rightPanel">
+              <div className="centered">
+                <RightPanel processed_image={processed_image} />
+              </div>
+            </div>
+          </div>
+          :
+          <div className="split rightPanel">
+            <div className="centered">
+              {
+                file === "" ? 
+                <p>Upload an image to be processed</p>
+                :
+                loading ?
+                <LoadingComponent />
+                :
+                <p>Click on process to view results or replace the current selection</p>
+              }
+              
+            </div>
+          </div>
+        }
+        
+      </div>
+    </BrowserRouter>
   );
 }
 
