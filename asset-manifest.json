@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/govtech-hackathon-2021-frontend/static/css/main.0bfd67e0.chunk.css",
-    "main.js": "/govtech-hackathon-2021-frontend/static/js/main.606b345a.chunk.js",
-    "main.js.map": "/govtech-hackathon-2021-frontend/static/js/main.606b345a.chunk.js.map",
+    "main.js": "/govtech-hackathon-2021-frontend/static/js/main.fcdf8a13.chunk.js",
+    "main.js.map": "/govtech-hackathon-2021-frontend/static/js/main.fcdf8a13.chunk.js.map",
     "runtime-main.js": "/govtech-hackathon-2021-frontend/static/js/runtime-main.2b5cdcb6.js",
     "runtime-main.js.map": "/govtech-hackathon-2021-frontend/static/js/runtime-main.2b5cdcb6.js.map",
     "static/js/2.f025a1c8.chunk.js": "/govtech-hackathon-2021-frontend/static/js/2.f025a1c8.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.2b5cdcb6.js",
     "static/js/2.f025a1c8.chunk.js",
     "static/css/main.0bfd67e0.chunk.css",
-    "static/js/main.606b345a.chunk.js"
+    "static/js/main.fcdf8a13.chunk.js"
   ]
 }
