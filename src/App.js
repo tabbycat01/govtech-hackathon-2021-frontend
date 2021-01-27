@@ -6,6 +6,7 @@ import LoadingComponent from "./components/Loading"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { BrowserRouter } from "react-router-dom"
+import WebcamComponent from './components/Webcam';
 
 function App() {
 
@@ -13,11 +14,12 @@ function App() {
   const [file, setFile] = React.useState("");
   const [notif, setNotif] = useState(null);
   const [loading, setLoading] = useState(false)
+  const [takingOne, setTakingOne] = useState(false)
 
   return (
     <BrowserRouter>
       <div className="App">
-        <h1>Passport cropping tool</h1>
+        <h1>Passport Photo Tool 📷</h1>
         {
           notif !== null 
           ?
@@ -35,7 +37,7 @@ function App() {
 
         <div className="split leftPanel"> 
           <div className="centered">
-            <LeftPanel setLoading={setLoading} file={file} setFile={setFile} setProcessedImage={setProcessedImage} setNotif={setNotif} />
+            <LeftPanel loading={loading} setLoading={setLoading} file={file} setFile={setFile} processedImage={processed_image} setProcessedImage={setProcessedImage} setNotif={setNotif} setTakingOne={setTakingOne} />
           </div>
         </div>
         {
@@ -55,8 +57,11 @@ function App() {
           <div className="split rightPanel">
             <div className="centered">
               {
+                takingOne ?
+                <WebcamComponent setFile={setFile} setTakingOne={setTakingOne} />
+                :
                 file === "" ? 
-                <p>Upload an image to be processed</p>
+                <p>Upload or an image or take one from your camera to be processed</p>
                 :
                 loading ?
                 <LoadingComponent />

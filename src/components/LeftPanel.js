@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import '../Panel.css';
 import { sendUpload } from "../services/ApiService"
 
-const LeftPanel = ({setLoading, file, setFile, setProcessedImage, setNotif}) => {
+const LeftPanel = ({loading, setLoading, file, setFile, processed_image, setProcessedImage, setNotif, setTakingOne}) => {
     
     const uploadAnImage = () => {
         document.getElementById("selectImage").click()
+        setTakingOne(false)
     }
 
     const fileSelectHandler = (event) => {
@@ -17,7 +18,7 @@ const LeftPanel = ({setLoading, file, setFile, setProcessedImage, setNotif}) => 
     }
 
     const confirmSendUpload = async () => {
-        
+        setProcessedImage("")
         setLoading(true)
         try {
             const response = await sendUpload(file)
@@ -34,13 +35,21 @@ const LeftPanel = ({setLoading, file, setFile, setProcessedImage, setNotif}) => 
         catch (exception) {
             // setError(true)
             setNotif({
-                message: 'Exception occured while uploading the image!',
+                message: exception.message || 'Exception occured while uploading the image!',
                 error: true
             })
-            console.log(exception)
+            setTimeout(() => {
+                setNotif(null)
+              }, 5000)
         } finally {
             setLoading(false);
         }
+    }
+
+    const webcamUpload = () => {
+        setTakingOne(true)
+        setFile("")
+        setProcessedImage("")
     }
 
     return (
@@ -51,16 +60,34 @@ const LeftPanel = ({setLoading, file, setFile, setProcessedImage, setNotif}) => 
                     <h3>Original image</h3>
                     {/* <img alt="uploaded_image" src={props.initialImage} /> */}
                     {file && <ImageThumb image={file} />}
-                    <div className="uploadButton" onClick={confirmSendUpload} >
-                        <p>Process this image</p>
+                    <div className={(file && loading) ? "dullButton": "processButton"} onClick={(file && loading) ? null: confirmSendUpload} >
+                        <p>{(file && loading) ? "Disabled while processing": "Process this image"}</p>
                     </div>
                 </div>
                 : null
             }
-            <div className={ file ? "dullButton": "uploadButton"} onClick={uploadAnImage}>
-                <input id="selectImage" onChange={fileSelectHandler} type="file" accept="image/*" hidden />
-                <p > {file === "" ? "Upload an": "Replace with another"} image</p>
-            </div> 
+            {
+                !(file && loading) ?
+                <div>
+                    <input id="selectImage" onChange={fileSelectHandler} type="file" accept=".jpg,.jpeg,.jfif,.png,.jpe,.jif,.jfi,.webp"  hidden />
+                    <div className={ file ? "dullButton": "uploadButton"} onClick={uploadAnImage}>
+                        <p> {file === "" ? "Upload ": "Upload new "} image </p>
+                    </div> 
+                    <div className={ file ? "dullButton": "uploadButton"} onClick={webcamUpload}>
+                        <p> {file === "" ? "Take a ": "Take a new "} picture</p>
+                    </div> 
+                </div>
+                :
+                <div>
+                    <div className="dullButton" >
+                        <p> Disabled while processing... </p>
+                    </div> 
+                    <div className="dullButton">
+                        <p> Disabled while processing... </p>
+                    </div> 
+                </div>
+            }
+            
         </div>
     )
 }
@@ -69,7 +96,13 @@ const LeftPanel = ({setLoading, file, setFile, setProcessedImage, setNotif}) => 
  * Component to display thumbnail of image.
  */
 const ImageThumb = ({ image }) => {
-    return <img src={URL.createObjectURL(image)} alt={image.name} />;
+    console.log(image)
+    try {
+        return <img id="leftImage" src={URL.createObjectURL(image)} alt={image.name} />;
+    } catch(e) {
+        return <img id="leftImage" src={image} alt={image.name} />;
+    }
+    
   };
 
 export default LeftPanel

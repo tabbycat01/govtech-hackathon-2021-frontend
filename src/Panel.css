@@ -3,7 +3,7 @@
     padding: 20px;
 }
 
-.uploadButton, .dullButton {
+.uploadButton, .dullButton, .processButton {
     border: 2px solid black;
     padding: 8px;
     margin-top: 8px;
@@ -11,19 +11,41 @@
 }
 
 p {
-    font-size: 15pt;
+    font-size: 14pt;
 }
 
-.uploadButton:hover{
-    background: rgb(138, 179, 147);
+.processButton {
+    background:rgb(201, 236, 209);
+}
+.processButton:hover {
+    background: rgb(157, 216, 157);
+    color: black;
+    border: 2px solid lightgreen;
+    cursor: pointer;
+}
+
+.uploadButton:hover {
+    background: rgb(201, 236, 209);
     color: black;
     border: 2px solid lightgreen;
     cursor: pointer;
 }
 
 .dullButton:hover {
-    background: rgb(118, 128, 120);
+    background: rgb(210, 216, 212);
     color: black;
-    border: 2px solid lightgreen;
+    border: 2px solid rgb(182, 197, 182);
     cursor: pointer;
+}
+
+#rightImage {
+    width: max(15vw,300px);
+}
+
+#leftImage {
+    height: min(30vh, 500px);
+}
+
+img {
+    border: 5px solid #555;
 }

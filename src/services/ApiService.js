@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-const END_POINT = "http://localhost:5000"
-
+const END_POINT = process.env.NODE_ENV === "development" ? process.env.REACT_APP_LOCAL_ENDPOINT : process.env.REACT_APP_PROD_ENDPOINT
 export const sendUpload  = async (file) => {
     const data = new FormData()
     data.append('user_file', file)

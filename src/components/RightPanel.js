@@ -9,8 +9,8 @@ const RightPanel = ({processed_image}) => {
 
     return (
         <div>
-            <h1>Cropped image</h1>
-            <img alt={processed_image} src={processed_image}/>
+            <h3>Processed image</h3>
+            <img id="rightImage" alt={processed_image} src={processed_image}/>
             <a style={{textDecoration: "none", color: "black"}} href={processed_image} target="_blank" download>
                 <div className="uploadButton">
                     <p>Download 
