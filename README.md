@@ -1,3 +1,5 @@
+# Hackathon Frontend React
+
 ## To run
 ### Ensure you have npm installed.
 ### `npm start`
