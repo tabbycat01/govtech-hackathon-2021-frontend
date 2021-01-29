@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import '../Panel.css';
 import { sendUpload } from "../services/ApiService"
 
-const LeftPanel = ({loading, setLoading, file, setFile, processed_image, setProcessedImage, setNotif, setTakingOne}) => {
+const LeftPanel = ({loading, setLoading, file, setFile, processed_image, setProcessedImage, setNotif, setTakingOne, setIssues, loadedFromWebcam, setLoadedFromWebcam}) => {
     
     const uploadAnImage = () => {
         document.getElementById("selectImage").click()
         setTakingOne(false)
+        setLoadedFromWebcam(false);
     }
 
     const fileSelectHandler = (event) => {
@@ -20,10 +21,11 @@ const LeftPanel = ({loading, setLoading, file, setFile, processed_image, setProc
     const confirmSendUpload = async () => {
         setProcessedImage("")
         setLoading(true)
+        setIssues([])
         try {
-            const response = await sendUpload(file)
-            setProcessedImage(response)
-            
+            const response = await sendUpload(file, loadedFromWebcam)
+            setProcessedImage(response.image_url)
+            setIssues(response.issues)
             setNotif({
                 message: 'Image processed succesfully!',
                 error: false
@@ -35,12 +37,12 @@ const LeftPanel = ({loading, setLoading, file, setFile, processed_image, setProc
         catch (exception) {
             // setError(true)
             setNotif({
-                message: exception.message || 'Exception occured while uploading the image!',
+                message: 'Well, this is awkward... we can\'t seem to find a face',
                 error: true
             })
             setTimeout(() => {
                 setNotif(null)
-              }, 5000)
+              }, 8000)
         } finally {
             setLoading(false);
         }
@@ -96,7 +98,6 @@ const LeftPanel = ({loading, setLoading, file, setFile, processed_image, setProc
  * Component to display thumbnail of image.
  */
 const ImageThumb = ({ image }) => {
-    console.log(image)
     try {
         return <img id="leftImage" src={URL.createObjectURL(image)} alt={image.name} />;
     } catch(e) {

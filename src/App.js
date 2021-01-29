@@ -15,6 +15,8 @@ function App() {
   const [notif, setNotif] = useState(null);
   const [loading, setLoading] = useState(false)
   const [takingOne, setTakingOne] = useState(false)
+  const [issues, setIssues] = useState([])
+  const [loadedFromWebcam, setLoadedFromWebcam] = useState(false)
 
   return (
     <BrowserRouter>
@@ -37,7 +39,7 @@ function App() {
 
         <div className="split leftPanel"> 
           <div className="centered">
-            <LeftPanel loading={loading} setLoading={setLoading} file={file} setFile={setFile} processedImage={processed_image} setProcessedImage={setProcessedImage} setNotif={setNotif} setTakingOne={setTakingOne} />
+            <LeftPanel loading={loading} setLoading={setLoading} file={file} setFile={setFile} processedImage={processed_image} setProcessedImage={setProcessedImage} setNotif={setNotif} setTakingOne={setTakingOne} setIssues={setIssues} loadedFromWebcam={loadedFromWebcam} setLoadedFromWebcam={setLoadedFromWebcam} />
           </div>
         </div>
         {
@@ -49,7 +51,7 @@ function App() {
 
             <div className="split rightPanel">
               <div className="centered">
-                <RightPanel processed_image={processed_image} />
+                <RightPanel processed_image={processed_image} issues={issues} />
               </div>
             </div>
           </div>
@@ -58,7 +60,7 @@ function App() {
             <div className="centered">
               {
                 takingOne ?
-                <WebcamComponent setFile={setFile} setTakingOne={setTakingOne} />
+                <WebcamComponent setFile={setFile} setTakingOne={setTakingOne} setLoadedFromWebcam={setLoadedFromWebcam} />
                 :
                 file === "" ? 
                 <p>Upload or an image or take one from your camera to be processed</p>

@@ -7,7 +7,7 @@ const videoConstraints = {
     height: 400
   };
 
-const WebcamComponent = ({setFile, setTakingOne}) => {
+const WebcamComponent = ({setFile, setTakingOne, setLoadedFromWebcam}) => {
 
     const webcamRef = React.useRef(null);
  
@@ -24,6 +24,7 @@ const WebcamComponent = ({setFile, setTakingOne}) => {
             setFile(file)
         })
         setTakingOne(false)
+        setLoadedFromWebcam(true)
         },
         [webcamRef]
     );
@@ -33,7 +34,7 @@ const WebcamComponent = ({setFile, setTakingOne}) => {
             <Webcam ref={webcamRef} audio={false} screenshotQuality={1} screenshotFormat="image/png" videoConstraints={videoConstraints} />
 
             <div className="uploadButton" onClick={capture}>Take a photo</div>
-            <div className="dullButton" onClick={() => { setTakingOne(false) }}>Cancel</div>
+            <div className="dullButton" onClick={() => { setTakingOne(false); setLoadedFromWebcam(false); }}>Cancel</div>
         </div>
         
     )
